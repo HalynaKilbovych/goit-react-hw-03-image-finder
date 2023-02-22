@@ -73,7 +73,7 @@ export class App extends Component {
   };
 
   handleCloseModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, largeImage: ''});
   };
 
   render() {
@@ -115,7 +115,7 @@ export class App extends Component {
           <SearchBar onSubmit={this.handleFormSubmit} />
           <ImageGallery items={images} onClick={this.handleImageClick} />
           {showModal && largeImage && (
-          <Modal image={largeImage} onClick={this.handleImageClick} tags={query} />
+          <Modal image={largeImage} onClick={this.handleCloseModal} tags={query} />
         )}
           {images.length < total && <Button onClick={this.loadMore} />}
         </Wrapper>

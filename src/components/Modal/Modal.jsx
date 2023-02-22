@@ -25,10 +25,10 @@ export class Modal extends Component {
   };
 
   render() {
-    const { image, tags, onClick } = this.props;
+    const { image, tags } = this.props;
 
     return (
-      <Backdrop onClick={onClick}>
+      <Backdrop onClick={this.handleClose}>
         <ModalWrap>
           <img src={image} alt={tags} />
         </ModalWrap>
