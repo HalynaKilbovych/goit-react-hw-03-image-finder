@@ -1,5 +1,5 @@
-// import { IoSearchOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
+import { CiSearch } from "react-icons/ci";
 import {
   SearchBox,
   SearchForm,
@@ -13,6 +13,7 @@ export function SearchBar({ onSubmit }) {
     <SearchBox>
       <SearchForm onSubmit={onSubmit}>
         <Button type="submit">
+        <CiSearch size={24} />
           <Label>Search</Label>
         </Button>
         <Input

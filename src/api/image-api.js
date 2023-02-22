@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '31091789-7fcda0dc0e44d84fdf903d578';
+const API_KEY = '19426296-0adceb4884beb75ab0f5599b5';
 
 export async function fetchImages({ query, page }) {
   const response = await fetch(
