@@ -6,7 +6,11 @@ export function ImageGallery({ items, onClick }) {
   return (
     <Gallery>
       {items.map(item => (
-        <ImageGalleryItem key={item.id} item={item} onClick={onClick} />
+        <ImageGalleryItem
+          key={item.id}
+          item={item}
+          onClick={() => onClick(item.largeImageURL)}
+        />
       ))}
     </Gallery>
   );

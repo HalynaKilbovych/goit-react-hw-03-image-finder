@@ -18,6 +18,7 @@ export class App extends Component {
     largeImage: '',
     error: '',
     status: 'idle',
+    showModal: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -67,16 +68,16 @@ export class App extends Component {
     }));
   };
 
-  openModal = image => {
-    this.setState({ largeImage: image });
+  handleImageClick = largeImage => {
+    this.setState({ largeImage, showModal: true });
   };
 
-  closeModal = () => {
-    this.setState({ largeImage: '' });
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
-    const { query, images, total, largeImage, status } = this.state;
+    const { query, images, total, largeImage, status, showModal} = this.state;
     if (status === 'idle') {
       return (
         <Wrapper>
@@ -91,7 +92,7 @@ export class App extends Component {
         <Wrapper>
           <GlobalStyle />
           <SearchBar onSubmit={this.handleFormSubmit} />
-          <ImageGallery items={images} onClick={this.openModal} />
+          <ImageGallery items={images} onClick={this.handleImageClick} />
           <Loader/>
         </Wrapper>
       );
@@ -112,10 +113,10 @@ export class App extends Component {
         <Wrapper>
           <GlobalStyle />
           <SearchBar onSubmit={this.handleFormSubmit} />
-          <ImageGallery items={images} onClick={this.openModal} />
-          {largeImage.length > 0 && (
-            <Modal onClose={this.closeModal} image={largeImage} tags={query}/>
-          )}
+          <ImageGallery items={images} onClick={this.handleImageClick} />
+          {showModal && largeImage && (
+          <Modal image={largeImage} onClick={this.handleImageClick} tags={query} />
+        )}
           {images.length < total && <Button onClick={this.loadMore} />}
         </Wrapper>
       );

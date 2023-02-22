@@ -3,29 +3,33 @@ import { Backdrop, ModalWrap } from './Modal.styled';
 import PropTypes from 'prop-types';
 
 export class Modal extends Component {
+  
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.onClick();
+    }
+  };
+
   componentDidMount() {
-    window.addEventListener('keydown', this.props.onClose);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.props.onClose);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  onCloseModal = e => {
-    const clickedTo = e.target.id;
-    const pressedKey = e.code;
-
-    if (clickedTo === 'backdrop' || pressedKey === 'Escape') {
-      this.props.onClose();
+  handleClose = event => {
+    if (event.target === event.currentTarget) {
+      this.props.onClick();
     }
   };
 
   render() {
-    const { image, tags, onClose } = this.props;
+    const { image, tags, onClick } = this.props;
 
     return (
-      <Backdrop id="backdrop" onClick={this.onCloseModal}>
-        <ModalWrap onClose={onClose}>
+      <Backdrop onClick={onClick}>
+        <ModalWrap>
           <img src={image} alt={tags} />
         </ModalWrap>
       </Backdrop>
@@ -35,6 +39,6 @@ export class Modal extends Component {
 
 Modal.propTypes = {
   image: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   tags: PropTypes.string.isRequired,
 };
